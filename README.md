@@ -120,10 +120,7 @@ Frontend will be available at `http://localhost:5174`
 - `GET /api/registrations` - Get all registrations
 - `POST /api/registrations` - Create a new registration
 
-## License
-
-MIT License
 
 ## Author
 
-Your Name
+Raihan Ahmed
