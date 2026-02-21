@@ -1,0 +1,29 @@
+# Backend
+backend/RegistrationApi/bin/
+backend/RegistrationApi/obj/
+backend/RegistrationApi/.vs/
+backend/RegistrationApi/.vscode/
+*.user
+*.suo
+
+# Frontend
+frontend/registration-ui/node_modules/
+frontend/registration-ui/dist/
+frontend/registration-ui/.env.local
+frontend/registration-ui/.env.development.local
+frontend/registration-ui/.env.test.local
+frontend/registration-ui/.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
