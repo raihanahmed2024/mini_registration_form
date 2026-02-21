@@ -1,36 +1,56 @@
-/* App.css */
+/* App.css - Full High-Contrast Solution */
+
+/* Root and Layout Reset */
+:root {
+  --primary-color: #2563eb;
+  --error-color: #dc2626;
+  --bg-color: #e2e8f0; /* Darker slate background to make white cards stand out */
+  --text-dark: #0f172a; /* Near black for maximum readability */
+  --border-color: #94a3b8; /* Clear, visible borders */
+}
+
 #app-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background-color: #f8fafc;
+  padding: 2.5rem 1.5rem;
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-color);
   min-height: 100vh;
 }
 
-/* SIDE-BY-SIDE LAYOUT */
+/* SIDE-BY-SIDE LAYOUT [cite: 48, 49, 50] */
 .content-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1.5fr; /* Form takes 40%, List takes 60% */
+  grid-template-columns: 420px 1fr; /* Form takes 420px, List takes remaining space */
   gap: 2.5rem;
   align-items: start;
 }
 
-/* Stack vertically on small screens */
-@media (max-width: 900px) {
+/* Stack vertically on mobile/small screens */
+@media (max-width: 950px) {
   .content-wrapper {
     grid-template-columns: 1fr;
   }
 }
 
+/* Card Styling [cite: 24] */
 .form-card, .submissions-card {
   background: #ffffff;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
-/* FORM ELEMENTS ALIGNMENT */
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid #cbd5e1;
+  padding-bottom: 0.5rem;
+}
+
+/* FORM ELEMENTS AND CONTRAST FIXES  */
 .form-group {
   margin-bottom: 1.25rem;
   display: flex;
@@ -38,78 +58,131 @@
 }
 
 label {
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: #475569;
-  margin-bottom: 0.4rem;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--text-dark); /* High contrast label */
+  margin-bottom: 0.5rem;
 }
 
-/* This forces text, date, and select to be identical */
+/* This forces text, date, and select to be identical in height and color */
 input, select {
   width: 100%;
-  height: 42px; /* Fixed height for uniformity */
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
-  font-size: 0.95rem;
-  box-sizing: border-box; /* Ensures padding doesn't push width out */
-  color: #1e293b;
+  height: 48px; /* Slightly taller for better touch/click targets */
+  padding: 0 1rem;
+  border: 2px solid var(--border-color); /* Thicker, darker border */
+  border-radius: 8px;
+  font-size: 1rem;
+  color: #000000; /* Pure black text for fields */
+  background-color: #ffffff;
+  box-sizing: border-box; /* Crucial for alignment */
+  transition: all 0.2s ease-in-out;
+}
+
+/* Fix for Date Picker and Dropdown padding issues */
+input[type="date"], select {
+  font-family: inherit;
+  cursor: pointer;
 }
 
 input:focus, select:focus {
   outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+  border-color: var(--primary-color);
+  background-color: #f8fafc;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
 }
 
+input::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+
+/* ERROR MESSAGE STYLING [cite: 20, 41] */
 .error-msg {
-  color: #ef4444;
-  font-size: 0.75rem;
-  margin-top: 0.3rem;
+  color: var(--error-color);
+  font-weight: 600;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  background-color: #fef2f2;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  border-left: 3px solid var(--error-color);
 }
 
+/* SUBMIT BUTTON WITH LOADING STATE [cite: 22] */
 .submit-btn {
   width: 100%;
-  background-color: #6366f1;
+  background-color: var(--primary-color);
   color: white;
-  padding: 0.75rem;
+  padding: 0.9rem;
   border: none;
-  border-radius: 6px;
-  font-weight: 600;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
-  transition: background 0.2s;
+  margin-top: 1rem;
+  transition: background 0.2s, transform 0.1s;
 }
 
 .submit-btn:hover:not(:disabled) {
-  background-color: #4f46e5;
+  background-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
 }
 
 .submit-btn:disabled {
   background-color: #94a3b8;
   cursor: not-allowed;
+  opacity: 0.8;
 }
 
-/* TABLE STYLING */
+/* TABLE STYLING [cite: 24, 33] */
 .table-container {
   overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
 }
 
 table {
   width: 100%;
   border-collapse: collapse;
+  background-color: white;
 }
 
 th {
   text-align: left;
   background-color: #f1f5f9;
-  padding: 1rem;
-  color: #64748b;
+  padding: 1.2rem 1rem;
+  color: #475569;
   font-size: 0.85rem;
+  font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid #e2e8f0;
 }
 
 td {
   padding: 1rem;
-  border-bottom: 1px solid #e2e8f0;
-  color: #334155;
+  border-bottom: 1px solid #f1f5f9;
+  color: var(--text-dark);
+  font-size: 0.95rem;
+}
+
+tbody tr:hover {
+  background-color: #f8fafc;
+}
+
+/* SUCCESS MESSAGE [cite: 23] */
+.success-alert {
+  background-color: #dcfce7;
+  color: #166534;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid #bbf7d0;
+  text-align: center;
+  font-weight: 600;
 }

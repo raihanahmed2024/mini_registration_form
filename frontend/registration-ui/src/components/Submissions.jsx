@@ -12,14 +12,19 @@ export default function Submissions({ refreshKey }) {
     setLoading(true);
     setError(null);
 
+    console.log("API Base URL:", api.defaults.baseURL);
+    console.log("Attempting to fetch from:", api.defaults.baseURL + "/registrations");
+
     api.get("/registrations")
       .then(res => {
+        console.log("Successfully fetched:", res.data);
         setData(res.data);
         setLoading(false);
       })
       .catch(err => {
-        console.error(err);
-        setError("Failed to fetch submissions.");
+        console.error("Fetch Error:", err.message);
+        console.error("Full Error:", err);
+        setError(`Failed to fetch submissions: ${err.message}`);
         setLoading(false);
       });
   }, [refreshKey]); // re-fetch whenever refreshKey changes
