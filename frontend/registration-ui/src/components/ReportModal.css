@@ -1,0 +1,257 @@
+.report-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.report-modal-content {
+  background-color: white;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 800px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.report-modal-header {
+  padding: 20px;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.report-modal-header h2 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1.5rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #64748b;
+  padding: 0;
+  line-height: 1;
+}
+
+.close-btn:hover {
+  color: #1e293b;
+}
+
+.report-modal-body {
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.report-table th,
+.report-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.report-table th {
+  background-color: #f8fafc;
+  color: #475569;
+  font-weight: 600;
+}
+
+.report-modal-footer {
+  padding: 20px;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.print-btn {
+  padding: 8px 16px;
+  background-color: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.print-btn:hover {
+  background-color: #e2e8f0;
+}
+
+.done-btn {
+  padding: 8px 16px;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.done-btn:hover {
+  background-color: #2563eb;
+}
+
+@media print {
+
+  /* Hide everything except the modal content when printing */
+  body>*:not(.report-modal-overlay),
+  #root>*:not(.report-modal-overlay),
+  .report-modal-header,
+  .report-modal-footer {
+    display: none !important;
+  }
+
+  .report-modal-overlay {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    background: none !important;
+    padding: 0 !important;
+    display: block !important;
+    visibility: visible !important;
+    z-index: auto !important;
+  }
+
+  .report-modal-content {
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    visibility: visible !important;
+    position: static !important;
+  }
+
+  /* Force visibility for all children of the modal */
+  .report-modal-overlay *,
+  .report-modal-content * {
+    visibility: visible !important;
+  }
+
+  /* Hide the close button and footer when printing */
+  .close-btn,
+  .report-modal-footer {
+    display: none !important;
+  }
+
+  /* Ensure table borders show up nicely in print */
+  .report-table {
+    border-collapse: collapse !important;
+    display: table !important;
+    /* Force table display */
+  }
+
+  .report-table th,
+  .report-table td {
+    border: 1px solid #ddd !important;
+  }
+
+  /* Table visibility toggle */
+  .ui-only {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .print-page {
+    page-break-after: always;
+    page-break-inside: avoid;
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .print-page:last-child {
+    page-break-after: auto;
+  }
+
+  .print-page-header {
+    display: block !important;
+  }
+
+  /* Hide pagination on print */
+  .pagination-container {
+    display: none !important;
+  }
+
+  /* Show print footer and ensure it's at the bottom */
+  .print-only-footer {
+    display: block !important;
+    position: fixed;
+    bottom: 0px;
+    left: 0;
+    width: 100%;
+    background: white;
+    text-align: center;
+    border-top: 1px solid #ddd;
+    font-size: 10pt;
+    padding: 10px 0;
+  }
+}
+
+.ui-only {
+  display: table;
+}
+
+.print-only {
+  display: none;
+}
+
+.print-only-footer {
+  display: none;
+}
+
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 20px;
+  border-top: 1px solid #e2e8f0;
+  gap: 15px;
+}
+
+.page-btn {
+  padding: 6px 12px;
+  background-color: #f1f5f9;
+  border: 1px solid #cbd5e1;
+  border-radius: 4px;
+  cursor: pointer;
+  color: #334155;
+  font-weight: 500;
+}
+
+.page-btn:hover:not(:disabled) {
+  background-color: #e2e8f0;
+}
+
+.page-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.page-info {
+  font-size: 0.9rem;
+  color: #475569;
+}
