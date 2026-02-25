@@ -112,9 +112,9 @@
 
 @media print {
 
-  /* Hide everything except the modal content when printing */
-  body>*:not(.report-modal-overlay),
-  #root>*:not(.report-modal-overlay),
+  /* Hide major UI components while keeping #root and modal ancestors visible */
+  #app-container>header,
+  .content-wrapper>*,
   .report-modal-header,
   .report-modal-footer {
     display: none !important;
@@ -143,9 +143,10 @@
     position: static !important;
   }
 
-  /* Force visibility for all children of the modal */
+  /* Force visibility for all descendants of the modal */
   .report-modal-overlay *,
-  .report-modal-content * {
+  .report-modal-content *,
+  .report-modal-body * {
     visibility: visible !important;
   }
 

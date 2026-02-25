@@ -14,9 +14,13 @@ export default function ReportModal({ isOpen, onClose, data }) {
 
     if (!isOpen) return null;
 
-    const totalPages = Math.ceil(data.length / itemsPerPage) || 1;
+    // Safety fallback and debug logging
+    const safeData = Array.isArray(data) ? data : [];
+    console.log("ReportModal Rendering - Data Length:", safeData.length);
+
+    const totalPages = Math.ceil(safeData.length / itemsPerPage) || 1;
     const startIndex = (currentPage - 1) * itemsPerPage;
-    const currentData = data.slice(startIndex, startIndex + itemsPerPage);
+    const currentData = safeData.slice(startIndex, startIndex + itemsPerPage);
 
     return (
         <div className="report-modal-overlay">
@@ -60,7 +64,7 @@ export default function ReportModal({ isOpen, onClose, data }) {
                     {/* Print View Table: Shows records in paginated chunks */}
                     <div className="print-only">
                         {Array.from({ length: totalPages }, (_, i) => i).map((pageIndex) => {
-                            const pageData = data.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage);
+                            const pageData = safeData.slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage);
                             return (
                                 <div key={pageIndex} className="print-page">
                                     <div className="print-page-header" style={{ marginBottom: '10px', display: 'none' }}>
